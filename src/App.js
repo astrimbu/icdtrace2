@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.png';
-import './App.css';
+import './styles/app.css';
 
 class App extends Component {
   render() {
@@ -13,10 +13,10 @@ class App extends Component {
         <p className="App-intro">
           Enter Diagnosis:
         </p>
-        <form className="App-diagnosis-form">
+        <form className="App-form">
           <textarea className="App-diagnosis" />
           <br /> 
-          <input type="submit" className="App-diagnosis-submit" value="Get ICD
+          <input type="submit" className="App-submit" value="Get ICD
       Codes" />
         </form>
       </div>
