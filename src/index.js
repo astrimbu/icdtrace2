@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './styles/app.css';
 import logo from './logo.png';
 import registerServiceWorker from './registerServiceWorker';
+import $ from 'jquery';
+window.jQuery = window.$ = $;
 
 
 class App extends Component {
@@ -10,12 +12,9 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <div className="app-header-color"></div>
+        <div className="header-color" />
         <Header />
-        <div className="app-main">
-          <DiagnosisForm />
-          <PrimaryResults />
-        </div>
+        <Main />
         <Footer />
       </div>
     );
@@ -28,14 +27,14 @@ class Header extends Component {
 
   render() {
     return (
-      <nav className="app-header">
-        <div className="app-header-content">
-          <div className="app-header-content-logo">
+      <nav className="header">
+        <div className="header-content">
+          <div className="header-content-logo">
             <a href="www.vertical-data.com">
-              <img src={logo} className="app-logo" alt="Seahorse Logo" />
+              <img src={logo} className="logo" alt="Seahorse Logo" />
             </a>
           </div>
-          <div className="app-header-content-title">
+          <div className="header-content-title">
             <h1>ICDTrace</h1>
           </div>
         </div>
@@ -49,11 +48,24 @@ class Footer extends Component {
   
   render() {
     return (
-      <footer className="app-footer">
-        <div className="app-footer-content">
+      <footer className="footer">
+        <div className="footer-content">
           Footer
         </div>
       </footer>
+    )
+  }
+}
+
+
+class Main extends Component {
+
+  render() {
+    return (
+      <div className="main">
+        <DiagnosisForm />
+        <Results />
+      </div>
     )
   }
 }
@@ -85,20 +97,43 @@ class DiagnosisForm extends Component {
 
   render() {
     return (
-      <div className="app-diagnosis-form">
+      <div className="diagnosis-form">
         <p>
           Enter Diagnosis:
         </p>
-        <form className="app-form" onSubmit={this.handleSubmit}>
-          <textarea className="app-diagnosis-textbox" value={this.state.value}
+        <form className="form" onSubmit={this.handleSubmit}>
+          <textarea className="diagnosis-textbox" value={this.state.value}
             onChange={this.handleChange} />
           <br /> 
-          <input type="submit" className="app-form-submit" value="Get ICD Codes" />
+          <input type="submit" className="form-submit" value="Get ICD Codes" />
         </form>
       </div>
     )
   }
 
+}
+
+
+class Results extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      results: [
+        {result: 1, code: 123, description: 'ur dead'},
+        {result: 2, code: 234, description: 'ur alive'}
+      ]
+    }
+  }
+
+  render() {
+    return (
+      <div className="results">
+        <PrimaryResults />
+        <SecondaryResults />
+      </div>
+    )
+  }
 }
 
 
@@ -139,10 +174,23 @@ class PrimaryResults extends Component {
             })}
           </tbody>
         </table>
+        Primary results!
       </div>
     )
   }
 
+}
+
+
+class SecondaryResults extends Component {
+
+  render() {
+    return (
+      <div className="secondary-results">
+        Secondary results!
+      </div>
+    )
+  }
 }
 
 
