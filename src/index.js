@@ -14,7 +14,7 @@ class App extends Component {
       <div className="app">
         <div className="header-color" />
         <Header />
-        <Main />
+        <Parent />
         <Footer />
       </div>
     );
@@ -58,20 +58,27 @@ class Footer extends Component {
 }
 
 
-class Main extends Component {
+class Parent extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {diagnosis: ''}
+
+    var session_url = 'https://acre.cdm.depaul.edu/default/api/v1/' +
+        'instant/ml/50/8?text=' + this.state.diagnosis 
+  }
+  
   render() {
     return (
-      <div className="main">
-        <DiagnosisForm />
+      <div className="parent">
+        <Diagnosis />
         <Results />
       </div>
     )
   }
 }
 
-
-class DiagnosisForm extends Component {
+class Diagnosis extends Component {
 
   constructor(props) {
     super(props)
@@ -86,13 +93,10 @@ class DiagnosisForm extends Component {
   }
 
   handleSubmit(event) {
+    var diagnosis = encodeURIComponent(this.state.value.trim())
+    alert(diagnosis)
+
     event.preventDefault()
-    var ml_model_id = 50
-    var tv_task_id  = 8
-    var diagnosis = this.state.value
-    diagnosis = encodeURIComponent(diagnosis.trim())
-    var session_url = 'https://acre.cdm.depaul.edu/default/api/v1/' +
-        'instant/ml/' + ml_model_id + '/' + tv_task_id + '?text=' + diagnosis
   }
 
   render() {
@@ -120,8 +124,9 @@ class Results extends Component {
     super(props)
     this.state = {
       results: [
-        {result: 1, code: 123, description: 'ur dead'},
-        {result: 2, code: 234, description: 'ur alive'}
+        {code: "R44", description: "Other symptoms and signs involving general sensations and perceptions"},
+        {code: "R63", description: "Symptoms and signs concerning food and fluid intake"},
+        {code: "R09", description: "Other symptoms and signs involving the circulatory and respiratory system"},
       ]
     }
   }
@@ -129,32 +134,7 @@ class Results extends Component {
   render() {
     return (
       <div className="results">
-        <PrimaryResults />
-        <SecondaryResults />
-      </div>
-    )
-  }
-}
-
-
-class PrimaryResults extends Component {
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      results: []
-    }
-
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  handleSubmit(event) {
-  }
-
-  render() {
-    return (
-      <div className="primary-results">
-        <table className="primary-results-table">
+        <table className="results-table">
           <thead>
             <tr>
               <th>Result</th>
@@ -166,7 +146,7 @@ class PrimaryResults extends Component {
             {this.state.results.map(function(result) {
               return (
                 <tr>
-                  <td>#</td>
+                  <td></td>
                   <td>{result.code}</td>
                   <td>{result.description}</td>
                 </tr>
@@ -174,20 +154,6 @@ class PrimaryResults extends Component {
             })}
           </tbody>
         </table>
-        Primary results!
-      </div>
-    )
-  }
-
-}
-
-
-class SecondaryResults extends Component {
-
-  render() {
-    return (
-      <div className="secondary-results">
-        Secondary results!
       </div>
     )
   }

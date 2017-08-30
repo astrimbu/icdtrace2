@@ -36,7 +36,7 @@ body {
   align-items: center;
   justify-content: center; }
   .header-content-title h1 {
-    font-size: 72px;
+    font-size: 64px;
     margin: 0px;
     font-family: "Titillium Web", sans-serif; }
 
@@ -46,11 +46,11 @@ body {
 .diagnosis-textbox {
   margin-bottom: 5px; }
 
-.primary-results {
+.results {
   width: 100%;
   text-align: center; }
 
-.primary-results-table {
+.results-table {
   margin: 0 auto;
   padding-top: 20px; }
 

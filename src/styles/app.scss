@@ -46,7 +46,7 @@ body {
   align-items: center;
   justify-content: center;
   h1 {
-    font-size: 72px;
+    font-size: 64px;
     margin: 0px;
     font-family: $titillium;
   }
@@ -61,17 +61,13 @@ body {
 }
 
 
-.primary-results {
+.results {
   width: 100%;
   text-align: center;
 }
-.primary-results-table {
+.results-table {
   margin: 0 auto;
   padding-top: 20px;
-}
-
-
-.secondary-results {
 }
 
 
