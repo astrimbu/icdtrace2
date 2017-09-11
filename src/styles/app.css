@@ -40,37 +40,19 @@ body {
     margin: 0px;
     font-family: "Titillium Web", sans-serif; }
 
-.diagnosis-form p {
-  margin-bottom: 0; }
+.icdtrace {
+  margin-top: 30px; }
 
-.diagnosis-textbox {
-  margin-bottom: 5px; }
+.diagnosis-form {
+  margin-bottom: 30px; }
+  .diagnosis-form h2 {
+    margin-bottom: 5px; }
+
+.diagnosis-text {
+  margin-bottom: 10px; }
 
 .results {
   width: 100%;
   text-align: center; }
-
-.results-table {
-  margin: 0 auto;
-  padding-top: 20px; }
-
-.footer {
-  color: #c7c7c7;
-  font-size: 15px;
-  font-weight: lighter;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 60px;
-  background: #333; }
-
-.footer-content {
-  padding-left: 15px;
-  padding-right: 15px;
-  margin: 20px; }
-
-.footer-veda {
-  font-family: "Titillium Web", sans-serif;
-  font-weight: 200; }
 
 /*# sourceMappingURL=app.css.map */

@@ -2866,7 +2866,13 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.1.9:
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
 
-grommet@^1.7.0:
+grommet-css@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/grommet-css/-/grommet-css-1.6.0.tgz#491e76b34a99a2b9ef3dd3bad4bb311df3823c5f"
+  dependencies:
+    grommet "^1.6.0"
+
+grommet@^1.6.0, grommet@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/grommet/-/grommet-1.7.0.tgz#f2ff6b134b9c4e153e26a1fde0060823117a6ae4"
   dependencies:
