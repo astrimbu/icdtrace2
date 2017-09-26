@@ -1,19 +1,21 @@
-$titillium: 'Titillium Web', sans-serif;
+$muli: 'Muli', sans-serif;
+$julius: 'Julius Sans One', sans-serif;
+$open-sans: 'Open Sans', sans-serif;
 $logo-green: #188a88;
-$green: #93c54b;
+$logo-green-light: rgba(24, 138, 136, 0.8);
 $grey: #c7c7c7;
+$purple: #865cd6;
 $logo-height: 150px;
+
 
 body {
   background-color: #eee;
   margin: 0;
 }
 
-
 .app {
   text-align: center;
 }
-
 
 .logo {
   height: $logo-height;
@@ -48,24 +50,30 @@ body {
   h1 {
     font-size: 64px;
     margin: 0px;
-    font-family: $titillium;
+    font-family: $open-sans;
   }
 }
 
 
-.icdtrace {
-  margin-top: 30px;
+.diagnosis-form h2 {
+  margin-bottom: 15px;
+  font: 30px $julius;
 }
-
-
-.diagnosis-form {
-  margin-bottom: 30px;
-  h2 {
-    margin-bottom: 5px;
-  }
+.diagnosis-form input:focus {
+  border-color: $logo-green;
 }
 .diagnosis-text {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  font-family: $muli;
+}
+.diagnosis-button {
+  font-family: $muli;
+  background-color: $logo-green;
+  border-color: $logo-green !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.20);
+}
+.diagnosis-button:hover {
+  box-shadow: 0px 0px 0px 2px $logo-green !important;
 }
 
 
@@ -73,4 +81,17 @@ body {
   width: 100%;
   text-align: center;
 }
-
+.results tbody tr:hover {
+  background-color: #ccc;
+}
+.results tbody tr._conf:hover{
+  background-color: $logo-green-light;
+}
+.loading {
+  margin-top: 20px;
+}
+._conf {
+  background-color: $logo-green-light;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.20);
+}
