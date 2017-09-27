@@ -56,7 +56,7 @@ class ICDTrace extends Component {
     super(props)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.aFunction = this.aFunction.bind(this)
+    this.selectResult = this.selectResult.bind(this)
 
     this.state = {
       diagnosis: '', 
@@ -81,8 +81,8 @@ class ICDTrace extends Component {
 
     let diagnosis = encodeURIComponent(this.state.diagnosis.trim())
     let session_url = 'https://acre.cdm.depaul.edu/default/api/v1/instant/ml/50/8?text=' + diagnosis 
-		console.log(session_url)
 
+    // if request_sent && !result_obtained, show "loading" icon
     this.setState({result_obtained: false})
 
     let xhr = new XMLHttpRequest()
@@ -108,26 +108,26 @@ class ICDTrace extends Component {
 				case 4: console.log("done")
           break
 				case undefined:
-					console.log("readyState: undefined")
+          // xhr issues --> undefined readystate simulates "sent" req
 					this.setState({request_sent: true})
           break
 				default: break
 			}
 		}
     xhr.open("POST", session_url, true)
-    const data = window.btoa(unescape(encodeURIComponent('icdtrace:user')))
+    const data = window.btoa(unescape(encodeURIComponent('user:pass')))
     xhr.setRequestHeader("Authorization", "Basic " + data)
     xhr.send()
 
     event.preventDefault()
   }
 
-  aFunction(event) {
+  selectResult(event) {
     var t = event.currentTarget
-    t.className = t.className + " _conf"
     this.setState({selected: t.id})
+    // setTimeout because setState calls are batched for performance 
+    // should really use componentDidUpdate
     setTimeout(() => {
-      console.log(this.state.selected)
       this.trimResults(this.state.selected)
     }, 1);
   }
@@ -137,7 +137,6 @@ class ICDTrace extends Component {
     console.log(results)
     results.result.forEach((r) => {
       if (r[1] == selected) {
-        console.log("THIS! --> " + r)
         this.setState({results: {result: [r]}})
       }
     })
@@ -153,7 +152,7 @@ class ICDTrace extends Component {
             </h2>
             <TextInput className="diagnosis-text" placeHolder="Diagnosis" onDOMChange={this.handleChange} />
             <br />
-            <Button type="submit" primary="true" label="Get ICD Codes"
+            <Button type="submit" primary={true} label="Get ICD Codes"
       className="diagnosis-button" />
             <br />
             {this.state.request_sent && !this.state.result_obtained &&
@@ -164,12 +163,20 @@ class ICDTrace extends Component {
 				{this.state.result_obtained &&
 					<Box className="results" size={{width: {max: "large"}}}>
 						<Table>
-							<TableHeader labels={['ID', 'Code', 'Description']} />
+							<TableHeader labels={['Result', 'Code', 'Description']} />
 							<tbody>
-								{this.state.results.result.map(result => {
-									return (
-										<Result aFunction={this.aFunction} key={result[1]} r={result} />
-									)
+								{this.state.results.result.map((result, i) => {
+                  if (this.state.selected == result[1]) {
+                    return (
+                      <Result conf=" _conf" selectResult={this.selectResult} 
+                      r={result} index={i} />
+                    )
+                  } else {
+                    return (
+                      <Result selectResult={this.selectResult} 
+                      r={result} index={i} />
+                    )
+                  }
 								})}
 							</tbody>
 						</Table>
@@ -193,8 +200,9 @@ class Result extends Component {
 
   render() {
     return (
-      <TableRow className="results" onClick={this.props.aFunction} id={this.props.r[1]}>
-        <td>{this.props.r[1]}</td>
+      <TableRow className={"results"+this.props.conf} onClick={this.props.selectResult}
+      id={this.props.r[1]} key={this.props.r[1]}>
+        <td>{this.props.index + 1}</td>
         <td>{this.props.r[2]}</td>
         <td>{this.props.r[3]}</td>
       </TableRow>
